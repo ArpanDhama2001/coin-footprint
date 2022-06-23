@@ -1,7 +1,6 @@
-import { colors, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
-import Search from "./Search";
 import TableComponent from "./TableComponent";
 
 const Body = () => {
@@ -20,7 +19,6 @@ const Body = () => {
         >
           Cryptocurrency Prices by Market Cap
         </Typography>
-        <Search />
         <TableComponent />
       </Container>
     </div>
