@@ -39,7 +39,7 @@ const Banner = () => {
           >
             Coin Footprint
           </Typography>
-          <Typography variant="subtitle1" color="secondary">
+          <Typography variant="subtitle1" color="#bdbdbd">
             Get All The Info Regarding Your Favorite Crypto Currency
           </Typography>
         </Box>

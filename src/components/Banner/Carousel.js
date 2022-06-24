@@ -20,7 +20,8 @@ const Carousel = () => {
   }, [currency]);
 
   const items = trending.map((coin) => {
-    const color = coin.price_change_percentage_24h > 0 ? "green" : "red";
+    const color =
+      coin.price_change_percentage_24h > 0 ? "rgb(14, 203, 129)" : "red";
     return (
       <div
         style={{

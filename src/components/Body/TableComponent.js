@@ -10,12 +10,18 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Pagination,
+  LinearProgress,
+  colors,
 } from "@mui/material";
 
 const TableComponent = () => {
   const { currency, symbol } = useContext(CurrencyContext);
+  const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
   const [coins, setCoins] = useState([]);
+  const [change, setChange] = useState(1);
+  const [page, setPage] = useState(1);
 
   const requestSearch = (search) => {
     // eslint-disable-next-line array-callback-return
@@ -31,15 +37,28 @@ const TableComponent = () => {
   };
 
   const fetchList = async () => {
+    setLoading(true);
     const { data } = await axios.get(Top100(currency));
     setList(data);
     setCoins(data);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currency]);
+
+  const convertToMillion = (num) => {
+    return Math.round(num / 1000000);
+  };
+
+  const changeColor = (change) => {
+    if (change >= 0) {
+      return "rgb(14, 203, 129)";
+    } else {
+      return "red";
+    }
+  };
 
   return (
     <div>
@@ -53,62 +72,127 @@ const TableComponent = () => {
       />
 
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Coin</TableCell>
-              <TableCell>{symbol} Price</TableCell>
-              <TableCell>24h Change</TableCell>
-              <TableCell>{symbol} Market Cap</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {coins.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      src={row.image}
-                      alt={row.name}
-                      style={{
-                        height: "60px",
-                        paddingRight: ".75rem",
-                      }}
-                    />
-                    <div
-                      style={{
-                        fontFamily: "Montserrat",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontWeight: "600",
-                          fontSize: "1.3rem",
-                        }}
-                      >
-                        {row.symbol.toUpperCase()}
-                      </p>
-                      <p>{row.name}</p>
-                    </div>
-                  </div>
+        {loading ? (
+          <LinearProgress
+            color="primary"
+            sx={{
+              margin: "2rem 0",
+            }}
+          />
+        ) : (
+          <Table sx={{ minWidth: 550 }} aria-label="simple table">
+            <TableHead>
+              <TableRow
+                sx={{
+                  backgroundColor: "#1de9b6",
+                  color: "black",
+                  fontWeight: "800",
+                }}
+              >
+                <TableCell
+                  sx={{
+                    color: "black",
+                    fontWeight: "800",
+                  }}
+                >
+                  Coin
                 </TableCell>
-                <TableCell>
-                  {symbol} {row.current_price}
+                <TableCell
+                  sx={{
+                    color: "black",
+                    fontWeight: "800",
+                  }}
+                >
+                  {symbol} Price
                 </TableCell>
-                <TableCell>{row.price_change_percentage_24h}%</TableCell>
-                <TableCell>
-                  {symbol} {row.market_cap}
+                <TableCell
+                  sx={{
+                    color: "black",
+                    fontWeight: "800",
+                  }}
+                >
+                  24h Change
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "black",
+                    fontWeight: "800",
+                  }}
+                >
+                  {symbol} Market Cap
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {coins.slice((page - 1) * 10, (page - 1) * 10 + 10).map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "left",
+                      }}
+                    >
+                      <img
+                        src={row.image}
+                        alt={row.name}
+                        style={{
+                          height: "60px",
+                          paddingRight: ".75rem",
+                        }}
+                      />
+                      <div
+                        style={{
+                          fontFamily: "Montserrat",
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontWeight: "600",
+                            fontSize: "1.3rem",
+                          }}
+                        >
+                          {row.symbol.toUpperCase()}
+                        </p>
+                        <p>{row.name}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell align="right">
+                    {symbol} {row.current_price}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    sx={{
+                      color: changeColor(change),
+                    }}
+                  >
+                    {row.price_change_percentage_24h}%
+                  </TableCell>
+                  <TableCell align="right">
+                    {symbol} {convertToMillion(row.market_cap)}M
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </TableContainer>
+
+      <Pagination
+        count={coins?.length / 10}
+        color="primary"
+        onChange={(_, e) => {
+          setPage(e);
+          window.scrollTo({ top: 450, behavior: "smooth" });
+        }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "2rem",
+        }}
+      />
     </div>
   );
 };

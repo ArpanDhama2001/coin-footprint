@@ -5,15 +5,18 @@ import TableComponent from "./TableComponent";
 
 const Body = () => {
   return (
-    <div>
+    <div
+      sx={{
+        backgroundColor: "#14161a",
+      }}
+    >
       <Container>
         <Typography
-          color="secondary.dark"
           variant="h4"
           align="center"
           sx={{
+            color: "white",
             fontFamily: "Montserrat",
-            // color: colors.grey[100],
             margin: "15px 0",
           }}
         >
