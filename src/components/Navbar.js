@@ -36,7 +36,7 @@ const Navbar = () => {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "#14161a",
+          backgroundColor: "#48eda8",
         }}
       >
         <Toolbar>
@@ -64,7 +64,7 @@ const Navbar = () => {
                 fullWidth
                 size="small"
                 varient="filled"
-                sx={{ color: "#1de9b6", outlineColor: "white" }}
+                sx={{ color: "black", outlineColor: "white" }}
               >
                 <MenuItem value="INR">INR</MenuItem>
                 <MenuItem value="USD">USD</MenuItem>

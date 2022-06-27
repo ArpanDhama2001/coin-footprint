@@ -84,7 +84,7 @@ const TableComponent = () => {
             <TableHead>
               <TableRow
                 sx={{
-                  backgroundColor: "#1de9b6",
+                  backgroundColor: "#48eda8",
                   color: "black",
                   fontWeight: "800",
                 }}
