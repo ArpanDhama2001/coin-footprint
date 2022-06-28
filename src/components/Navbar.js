@@ -33,12 +33,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar
-        position="static"
-        sx={{
-          backgroundColor: "#48eda8",
-        }}
-      >
+      <AppBar position="static">
         <Toolbar>
           <Container
             sx={{
@@ -49,7 +44,7 @@ const Navbar = () => {
           >
             <Typography
               variant="h6"
-              color="primary"
+              color="#48eda8"
               sx={{
                 fontWeight: "800",
                 fontFamily: "Montserrat",
@@ -64,7 +59,7 @@ const Navbar = () => {
                 fullWidth
                 size="small"
                 varient="filled"
-                sx={{ color: "black", outlineColor: "white" }}
+                sx={{ color: "#48eda8", outlineColor: "white" }}
               >
                 <MenuItem value="INR">INR</MenuItem>
                 <MenuItem value="USD">USD</MenuItem>
