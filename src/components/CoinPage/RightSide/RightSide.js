@@ -45,7 +45,13 @@ const RightSide = () => {
   }, [currency, days]);
 
   return (
-    <Box width="70%">
+    <Box
+      width="70%"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+    >
       {pastPrices == 0 ? (
         <CircularProgress
           sx={{
@@ -57,9 +63,11 @@ const RightSide = () => {
       ) : (
         <>
           <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
+            height="100%"
+            width="95%"
+            // display="flex"
+            // flexDirection="column"
+            // alignItems="center"
             padding="2rem"
           >
             <Line
