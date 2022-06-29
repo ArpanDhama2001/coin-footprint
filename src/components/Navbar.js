@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import { Toolbar, Typography, Box, MenuItem, Select } from "@mui/material";
 import { Container } from "@mui/system";
 import { CurrencyContext } from "../CurrencyContext";
+import { useNavigate } from "react-router-dom";
 
 // import axios from "axios";
 // import { currencies } from "../config/apis";
@@ -13,6 +14,8 @@ const Navbar = () => {
   const updateCurrency = (e) => {
     setCurrency(e.target.value);
   };
+
+  const navigate = useNavigate();
 
   /* 
 		Thsi fetch supported currencies from Gecko Api ans tried to create <MenuItems> by mapping over the array of supported currencies	
@@ -43,11 +46,16 @@ const Navbar = () => {
             }}
           >
             <Typography
-              variant="h6"
+              onClick={() => {
+                navigate("/");
+              }}
+              variant="standard"
               color="#48eda8"
               sx={{
+                fontSize: "1.4rem",
                 fontWeight: "800",
                 fontFamily: "Montserrat",
+                cursor: "pointer",
               }}
             >
               Coin Footprint

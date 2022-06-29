@@ -14,8 +14,11 @@ import {
   Pagination,
   LinearProgress,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const TableComponent = () => {
+  const navigate = useNavigate();
+
   const { currency, symbol } = useContext(CurrencyContext);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
@@ -126,7 +129,15 @@ const TableComponent = () => {
             </TableHead>
             <TableBody>
               {coins.slice((page - 1) * 10, (page - 1) * 10 + 10).map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  onClick={() => {
+                    navigate(`/coins/${row.id}`);
+                  }}
+                  sx={{
+                    cursor: "pointer",
+                  }}
+                  key={row.id}
+                >
                   <TableCell>
                     <div
                       style={{
