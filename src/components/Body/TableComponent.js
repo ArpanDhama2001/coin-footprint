@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { Top100 } from "../../config/apis";
 import { CurrencyContext } from "../../CurrencyContext";
@@ -12,7 +13,6 @@ import {
   TableRow,
   Pagination,
   LinearProgress,
-  colors,
 } from "@mui/material";
 
 const TableComponent = () => {
@@ -20,6 +20,7 @@ const TableComponent = () => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
   const [coins, setCoins] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [change, setChange] = useState(1);
   const [page, setPage] = useState(1);
 

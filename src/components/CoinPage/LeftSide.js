@@ -6,7 +6,7 @@ const LeftSide = (props) => {
   const { symbol } = useContext(CurrencyContext);
   const { name, image, description, rank, currentPrice, marketCap } = props;
   return (
-    <Box borderRight="2px solid grey" width="25%" height="100%" padding="2rem">
+    <Box borderRight="2px solid grey" width="25%" height="100vh" padding="2rem">
       <Box display="flex" flexDirection="column" alignItems="center">
         <img
           src={image}

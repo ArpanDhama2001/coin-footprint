@@ -12,3 +12,7 @@ export const Top100 = (currency) => {
 export const coinData = (coinid) => {
   return `https://api.coingecko.com/api/v3/coins/${coinid}`;
 };
+
+export const pastData = (coinid, currency, days) => {
+  return `https://api.coingecko.com/api/v3/coins/${coinid}/market_chart?vs_currency=${currency}&days=${days}`;
+};
