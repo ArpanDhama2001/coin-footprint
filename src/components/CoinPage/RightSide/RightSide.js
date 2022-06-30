@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Typography } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { CurrencyContext } from "../../../CurrencyContext";
 import { pastData } from "../../../config/apis";
@@ -16,6 +16,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import SelectButton from "./SelectButton";
 
 ChartJS.register(
   CategoryScale,
@@ -29,10 +30,10 @@ ChartJS.register(
 
 const RightSide = () => {
   const [pastPrices, setPastPrices] = useState([]);
-  const [days, setDays] = useState(1);
+  const [selected, setSelected] = useState(false);
 
   const prams = useParams();
-  const { currency, symbol } = useContext(CurrencyContext);
+  const { currency, symbol, days, setDays } = useContext(CurrencyContext);
 
   const fetchPastPrices = async (coinid) => {
     const { data } = await axios.get(pastData(coinid, currency, days));
@@ -58,18 +59,11 @@ const RightSide = () => {
             color: "#48eda8",
           }}
           size={250}
-          thickness={1}
+          thickness={2}
         />
       ) : (
         <>
-          <Box
-            height="100%"
-            width="95%"
-            // display="flex"
-            // flexDirection="column"
-            // alignItems="center"
-            padding="2rem"
-          >
+          <Box height="100%" width="95%" padding="2rem">
             <Line
               options={{
                 elements: {
@@ -97,6 +91,42 @@ const RightSide = () => {
                 ],
               }}
             />
+            <Box
+              marginTop="25px"
+              sx={{
+                display: "flex",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <SelectButton
+                label="1 Day"
+                onClick={() => {
+                  setDays(1);
+                }}
+                selected={days === 1}
+              />
+              <SelectButton
+                label="1 Month"
+                onClick={() => {
+                  setDays(30);
+                }}
+                selected={days === 30}
+              />
+              <SelectButton
+                label="6 Months"
+                onClick={() => {
+                  setDays(182);
+                }}
+                selected={days === 182}
+              />
+              <SelectButton
+                label="1 Year"
+                onClick={() => {
+                  setDays(365);
+                }}
+                selected={days === 365}
+              />
+            </Box>
           </Box>
         </>
       )}
