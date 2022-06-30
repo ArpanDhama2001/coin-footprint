@@ -1,0 +1,14 @@
+.BtnFocused {
+  background-color: red;
+}
+
+.BtnSimple {
+  width: "15rem";
+  color: "white";
+  border-color: "other.main";
+}
+
+.BtnSimple:hover {
+  color: "black";
+  backgroundcolor: "other.main";
+}

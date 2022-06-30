@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
+import "./App.css";
 
 import { CurrencyProvider } from "./CurrencyContext";
 import Homepage from "./routes/Homepage";
@@ -16,7 +17,7 @@ const theme = createTheme({
       //another one: #28a745
     },
     secondary: {
-      main: "#bdbdbd",
+      main: "#48eda8",
     },
     other: {
       main: "#48eda8",

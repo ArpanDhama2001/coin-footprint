@@ -65,7 +65,11 @@ const TableComponent = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        marginBottom: "10px",
+      }}
+    >
       <TextField
         fullWidth
         variant="outlined"
@@ -75,7 +79,11 @@ const TableComponent = () => {
         }}
       />
 
-      <TableContainer>
+      <TableContainer
+        sx={{
+          marginTop: "10px",
+        }}
+      >
         {loading ? (
           <LinearProgress
             color="primary"
@@ -105,6 +113,7 @@ const TableComponent = () => {
                   sx={{
                     color: "black",
                     fontWeight: "800",
+                    textAlign: "right",
                   }}
                 >
                   {symbol} Price
@@ -113,6 +122,7 @@ const TableComponent = () => {
                   sx={{
                     color: "black",
                     fontWeight: "800",
+                    textAlign: "right",
                   }}
                 >
                   24h Change
@@ -121,6 +131,7 @@ const TableComponent = () => {
                   sx={{
                     color: "black",
                     fontWeight: "800",
+                    textAlign: "right",
                   }}
                 >
                   {symbol} Market Cap

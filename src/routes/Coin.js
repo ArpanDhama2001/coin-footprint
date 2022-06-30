@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { coinData } from "../config/apis";
-import { Box, LinearProgress } from "@mui/material";
+import { Box, CircularProgress, LinearProgress } from "@mui/material";
 import LeftSide from "../components/CoinPage/LeftSide";
 import RightSide from "../components/CoinPage/RightSide/RightSide";
 import Navbar from "../components/Navbar";
@@ -28,7 +28,17 @@ const Coin = () => {
   }, [currency]);
 
   if (!coin) {
-    return <LinearProgress style={{ backgroundColor: "other.main" }} />;
+    return (
+      <Box
+        backgroundColor="#14161a"
+        height="100vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <CircularProgress color="secondary" size={200} />
+      </Box>
+    );
   }
   return (
     <Box>
