@@ -4,12 +4,14 @@ import { Toolbar, Typography, Box, MenuItem, Select } from "@mui/material";
 import { Container } from "@mui/system";
 import { CurrencyContext } from "../CurrencyContext";
 import { useNavigate } from "react-router-dom";
+import LoginModal from "./Authentication/LoginModal";
+import UserSidebar from "./Authentication/UserSidebar";
 
 // import axios from "axios";
 // import { currencies } from "../config/apis";
 
 const Navbar = () => {
-  const { currency, setCurrency } = useContext(CurrencyContext);
+  const { currency, setCurrency, user } = useContext(CurrencyContext);
 
   const updateCurrency = (e) => {
     setCurrency(e.target.value);
@@ -34,12 +36,15 @@ const Navbar = () => {
 		console.log(currencyList);
 	*/
 
+  // console.log(user);
+
   return (
     <>
       <AppBar position="static">
         <Toolbar>
           <Container
             sx={{
+              width: "70%",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -60,18 +65,27 @@ const Navbar = () => {
             >
               Coin Footprint
             </Typography>
-            <Box width="90px">
+            <Box
+              width="90px"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+              }}
+            >
               <Select
                 value={currency}
                 onChange={(e) => updateCurrency(e)}
                 fullWidth
                 size="small"
                 varient="filled"
-                sx={{ color: "#48eda8", outlineColor: "white" }}
+                sx={{ color: "#48eda8", minWidth: "80px", height: "40px" }}
               >
                 <MenuItem value="INR">INR</MenuItem>
                 <MenuItem value="USD">USD</MenuItem>
               </Select>
+              {!user ? <LoginModal /> : <UserSidebar />}
             </Box>
           </Container>
         </Toolbar>
