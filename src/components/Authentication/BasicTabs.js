@@ -1,11 +1,10 @@
 import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Login from "./Login";
 import Signup from "./Signup";
 import { AppBar, Button } from "@mui/material";
+import GoogleButton from "react-google-button";
+import { signInWithGoogle } from "../../config/firebaseConfig";
 
 const styles = {
   Btn: {
@@ -28,7 +27,6 @@ export default function BasicTabs({ handleClose }) {
     <Box
       sx={{
         width: "100%",
-        // backgroundColor: "#14161a",
         borderRadius: "10px",
         outline: "none",
         border: "0px",
@@ -39,7 +37,6 @@ export default function BasicTabs({ handleClose }) {
         sx={{
           backgroundColor: "#424242",
           color: "white",
-          // boxShadow: "5px 5px 2px 2px black",
           borderRadius: "10px",
         }}
       >
@@ -80,6 +77,29 @@ export default function BasicTabs({ handleClose }) {
           <Signup handleClose={handleClose} />
         )}
       </div>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "20px",
+          paddingBottom: "20px",
+        }}
+      >
+        <span
+          style={{
+            color: "white",
+            fontFamily: "Montserrat",
+            fontSize: "1.3rem",
+          }}
+        >
+          OR
+        </span>
+        <GoogleButton
+          onClick={signInWithGoogle}
+          style={{ width: "90%" }}
+        ></GoogleButton>
+      </Box>
     </Box>
   );
 }
