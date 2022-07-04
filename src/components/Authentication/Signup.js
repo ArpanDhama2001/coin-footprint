@@ -11,6 +11,18 @@ const style = {
     display: "flex",
     justifyContent: "center",
   },
+  signUpBtn: {
+    width: "100%",
+    fontWeight: "bold",
+    color: "black",
+    backgroundColor: "other.main",
+    fontSize: "1rem",
+    letterSpacing: ".1rem",
+    "&:hover": {
+      backgroundColor: "other.main",
+      opacity: "0.9",
+    },
+  },
 };
 
 const Signup = () => {
@@ -26,7 +38,15 @@ const Signup = () => {
         registerPassword
       );
     } catch (error) {
-      console.log(error);
+      window.alert(error);
+    }
+  };
+
+  const handleSignUpClick = () => {
+    if (registerPassword === confirmRegisterPassword) {
+      registerUser();
+    } else {
+      window.alert("Confirm password do not match");
     }
   };
 
@@ -69,23 +89,8 @@ const Signup = () => {
       ></TextField>
       <div style={style.btnDiv}>
         <Button
-          onClick={() => {
-            registerPassword === confirmRegisterPassword
-              ? registerUser()
-              : console.log("Confirm Password do not match!");
-          }}
-          sx={{
-            width: "100%",
-            fontWeight: "bold",
-            color: "black",
-            backgroundColor: "other.main",
-            fontSize: "1rem",
-            letterSpacing: ".1rem",
-            "&:hover": {
-              backgroundColor: "other.main",
-              opacity: "0.9",
-            },
-          }}
+          onClick={handleSignUpClick}
+          sx={style.signUpBtn}
           variant="contained"
         >
           SIGN UP

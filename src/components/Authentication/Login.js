@@ -11,7 +11,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
     } catch (error) {
-      console.log(error);
+      window.alert(error);
     }
   };
 

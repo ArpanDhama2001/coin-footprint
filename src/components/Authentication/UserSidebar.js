@@ -52,6 +52,7 @@ export default function UserSidebar() {
           alignItems: "center",
           gap: "10px",
           padding: "1rem",
+          overflow: "auto",
         },
       },
       LoginBtn: {
