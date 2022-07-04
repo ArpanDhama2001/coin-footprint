@@ -80,7 +80,7 @@ const Navbar = () => {
                 fullWidth
                 size="small"
                 varient="filled"
-                sx={{ color: "#48eda8", minWidth: "80px", height: "40px" }}
+                sx={{ color: "#48eda8", minWidth: "90px", height: "40px" }}
               >
                 <MenuItem value="INR">INR</MenuItem>
                 <MenuItem value="USD">USD</MenuItem>
