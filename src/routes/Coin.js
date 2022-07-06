@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { coinData } from "../config/apis";
-import { Box, CircularProgress, LinearProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import LeftSide from "../components/CoinPage/LeftSide";
 import RightSide from "../components/CoinPage/RightSide/RightSide";
 import Navbar from "../components/Navbar";
@@ -48,6 +48,7 @@ const Coin = () => {
           <p>loading</p>
         ) : (
           <LeftSide
+            id={coin.id}
             names={coin.name}
             image={coin.image.large}
             description={coin.description.en}

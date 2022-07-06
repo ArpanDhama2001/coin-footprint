@@ -1,10 +1,57 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
+import { db } from "../../config/firebaseConfig";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 
 const LeftSide = (props) => {
-  const { symbol } = useContext(CurrencyContext);
+  const { symbol, watchList, setWatchList, user } = useContext(CurrencyContext);
   const { name, image, description, rank, currentPrice, marketCap } = props;
+
+  const inWatchList = watchList.includes(props.id);
+
+  const addToWatchList = async () => {
+    const coinRef = doc(db, "watchList", user.uid);
+    if (watchList) {
+      setWatchList([...watchList, props.id]);
+    } else {
+      setWatchList([props.id]);
+    }
+
+    try {
+      await setDoc(
+        coinRef,
+        {
+          coins: watchList ? [...watchList, props.id] : [props.id],
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+
+  const removeFromWatchList = async () => {
+    const coinRef = doc(db, "watchList", user.uid);
+    if (watchList) {
+      setWatchList([...watchList, props.id]);
+    } else {
+      setWatchList([props.id]);
+    }
+
+    try {
+      await setDoc(
+        coinRef,
+        {
+          coins: watchList.filter((coin) => coin !== props.id),
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      window.alert(error);
+    }
+  };
+
   return (
     <Box borderRight="2px solid grey" width="25%" height="100vh" padding="2rem">
       <Box display="flex" flexDirection="column" alignItems="center">
@@ -71,6 +118,30 @@ const LeftSide = (props) => {
           </Typography>{" "}
           {symbol + " " + marketCap}
         </Typography>
+        {user && (
+          <Button
+            onClick={() => {
+              if (inWatchList) {
+                removeFromWatchList();
+              } else {
+                addToWatchList();
+              }
+            }}
+            variant="contained"
+            sx={{
+              width: "100%",
+              backgroundColor: inWatchList ? "#808080" : "other.main",
+              marginTop: "2rem",
+              color: inWatchList ? "white" : "black",
+              fontSize: "1rem",
+              "&:hover": {
+                backgroundColor: inWatchList ? "crimson" : "other.main",
+              },
+            }}
+          >
+            {inWatchList ? "Remove from WatchList" : "Add to WatchList"}
+          </Button>
+        )}
       </Box>
     </Box>
   );
