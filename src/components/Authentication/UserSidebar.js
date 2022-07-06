@@ -4,8 +4,9 @@ import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebaseConfig";
-import { Avatar, Typography } from "@mui/material";
+import { Avatar, Divider, Typography } from "@mui/material";
 import { CurrencyContext } from "../../CurrencyContext";
+import WatchListItem from "./WatchListItem";
 
 export default function UserSidebar() {
   const style = {
@@ -38,8 +39,8 @@ export default function UserSidebar() {
         },
         profilePic: {
           backgroundColor: "other.main",
-          height: "40%",
-          width: "40%",
+          height: "150px",
+          width: "150px",
         },
         wishList: {
           height: "60%",
@@ -65,11 +66,15 @@ export default function UserSidebar() {
         height: "50px",
         backgroundColor: "other.main",
         border: "none",
+        "&:hover": {
+          backgroundColor: "other.main",
+          opacity: ".8",
+        },
       },
     },
   };
 
-  const { user, coin, watchList } = React.useContext(CurrencyContext);
+  const { user, coins, watchList } = React.useContext(CurrencyContext);
 
   const [state, setState] = React.useState({
     top: false,
@@ -130,11 +135,27 @@ export default function UserSidebar() {
             >
               Watch List
             </Typography>
-            {/* <Box sx={style.watchCoin}>
-              {
-                coin.
+            {coins.map((coin) => {
+              if (watchList.includes(coin.id)) {
+                return (
+                  <>
+                    <WatchListItem
+                      key={coin.id}
+                      coinSymbol={coin.symbol}
+                      currentPrice={coin.current_price}
+                    />
+                    <Divider
+                      sx={{
+                        color: "white",
+                        // border: "2px solid white",
+                        width: "100%",
+                      }}
+                      variant="middle"
+                    />
+                  </>
+                );
               }
-            </Box> */}
+            })}
           </Box>
         </Box>
 

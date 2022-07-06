@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
 import { db } from "../../config/firebaseConfig";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 const LeftSide = (props) => {
   const { symbol, watchList, setWatchList, user } = useContext(CurrencyContext);

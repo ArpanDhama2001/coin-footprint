@@ -19,10 +19,10 @@ import { useNavigate } from "react-router-dom";
 const TableComponent = () => {
   const navigate = useNavigate();
 
-  const { currency, symbol } = useContext(CurrencyContext);
+  const { currency, symbol, coins, setCoins } = useContext(CurrencyContext);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
-  const [coins, setCoins] = useState([]);
+  // const [coins, setCoins] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [change, setChange] = useState(1);
   const [page, setPage] = useState(1);
@@ -45,6 +45,7 @@ const TableComponent = () => {
     const { data } = await axios.get(Top100(currency));
     setList(data);
     setCoins(data);
+    console.log("coins: ", coins);
     setLoading(false);
   };
 

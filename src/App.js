@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
-
 import { CurrencyProvider } from "./CurrencyContext";
 import Homepage from "./routes/Homepage";
 import Coin from "./routes/Coin";
