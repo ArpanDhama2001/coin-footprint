@@ -11,7 +11,7 @@ export default function UserSidebar() {
   const style = {
     sideBar: {
       outer: {
-        height: "100vh",
+        height: "100%",
         width: "360px",
         display: "flex",
         flexDirection: "column",
@@ -34,11 +34,12 @@ export default function UserSidebar() {
           alignItems: "center",
           gap: "15px",
           marginBottom: "10px",
+          // height: "40%",
         },
         profilePic: {
           backgroundColor: "other.main",
-          height: "200px",
-          width: "200px",
+          height: "40%",
+          width: "40%",
         },
         wishList: {
           height: "60%",
@@ -60,7 +61,6 @@ export default function UserSidebar() {
         color: "black",
         fontSize: "1rem",
         fontWeight: "600",
-        border: "1px solid white",
         width: "100%",
         height: "50px",
         backgroundColor: "other.main",
@@ -69,7 +69,7 @@ export default function UserSidebar() {
     },
   };
 
-  const { user } = React.useContext(CurrencyContext);
+  const { user, coin, watchList } = React.useContext(CurrencyContext);
 
   const [state, setState] = React.useState({
     top: false,
@@ -130,6 +130,11 @@ export default function UserSidebar() {
             >
               Watch List
             </Typography>
+            {/* <Box sx={style.watchCoin}>
+              {
+                coin.
+              }
+            </Box> */}
           </Box>
         </Box>
 
