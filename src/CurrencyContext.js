@@ -21,20 +21,21 @@ export const CurrencyProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+
+      if (user) {
+        const coinRef = doc(db, "watchList", user.uid);
+        const unsubscribe = onSnapshot(coinRef, (coin) => {
+          if (coin.exists()) {
+            setWatchList(coin.data().coins);
+          } else {
+            console.log("No Items in WatchList");
+          }
+        });
+        return () => {
+          unsubscribe();
+        };
+      }
     });
-    if (user) {
-      const coinRef = doc(db, "watchList", user.uid);
-      const unsubscribe = onSnapshot(coinRef, (coin) => {
-        if (coin.exists()) {
-          setWatchList(coin.data().coins);
-        } else {
-          console.log("No Items in WatchList");
-        }
-      });
-      return () => {
-        unsubscribe();
-      };
-    }
   }, [user]);
 
   return (
