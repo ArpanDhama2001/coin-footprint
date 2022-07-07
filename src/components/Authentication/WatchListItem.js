@@ -2,6 +2,8 @@ import { Box } from "@mui/material";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import React, { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../config/firebaseConfig";
 
 const style = {
   Item: {
@@ -34,15 +36,43 @@ const style = {
   },
 };
 
-const WatchListItem = ({ coinSymbol, currentPrice }) => {
-  const { symbol } = useContext(CurrencyContext);
+const WatchListItem = ({ coinid, coinSymbol, currentPrice }) => {
+  const { symbol, user, watchList, setWatchList } = useContext(CurrencyContext);
+
+  const removeFromWatchList = async (coinid) => {
+    const coinRef = doc(db, "watchList", user.uid);
+    if (watchList) {
+      setWatchList([...watchList, coinid]);
+    } else {
+      setWatchList([coinid]);
+    }
+
+    try {
+      await setDoc(
+        coinRef,
+        {
+          coins: watchList.filter((coin) => coin !== coinid),
+        },
+        { merge: true }
+      );
+    } catch (error) {
+      window.alert(error);
+    }
+  };
 
   return (
     <Box sx={style.Item}>
       <span style={{ color: "#48eda8" }}>{coinSymbol.toUpperCase()}</span>
       <Box sx={style.ItemRight}>
         <span>{symbol + currentPrice}</span>
-        <RemoveCircleOutlineIcon sx={style.RemoveBtn} />
+        <RemoveCircleOutlineIcon
+          onClick={() => {
+            removeFromWatchList(coinid);
+            // console.log(watchList);
+            // console.log("removed", user.uid);
+          }}
+          sx={style.RemoveBtn}
+        />
       </Box>
     </Box>
   );

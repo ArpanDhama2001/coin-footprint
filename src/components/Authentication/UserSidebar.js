@@ -100,12 +100,7 @@ export default function UserSidebar() {
   };
 
   const list = (anchor) => (
-    <Box
-      sx={style.sideBar.outer}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+    <Box sx={style.sideBar.outer} role="presentation">
       <Box sx={style.sideBar.container}>
         <Box sx={style.sideBar.main.body}>
           <Box sx={style.sideBar.main.profile}>
@@ -140,7 +135,8 @@ export default function UserSidebar() {
                 return (
                   <>
                     <WatchListItem
-                      key={coin.id}
+                      // key={coin.id}
+                      coinid={coin.id}
                       coinSymbol={coin.symbol}
                       currentPrice={coin.current_price}
                     />
