@@ -35,6 +35,7 @@ const Banner = () => {
             gutterBottom
             sx={{
               fontWeight: "800",
+              fontSize: { xs: "2rem", lg: "auto" },
             }}
           >
             Coin Footprint

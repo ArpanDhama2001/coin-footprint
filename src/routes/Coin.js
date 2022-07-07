@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { coinData } from "../config/apis";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Divider } from "@mui/material";
 import LeftSide from "../components/CoinPage/LeftSide";
 import RightSide from "../components/CoinPage/RightSide/RightSide";
 import Navbar from "../components/Navbar";
@@ -31,7 +31,7 @@ const Coin = () => {
     return (
       <Box
         backgroundColor="#14161a"
-        height="100vh"
+        height="100%"
         display="flex"
         alignItems="center"
         justifyContent="center"
@@ -43,7 +43,11 @@ const Coin = () => {
   return (
     <Box>
       <Navbar />
-      <Box backgroundColor="#14161a" display="flex">
+      <Box
+        backgroundColor="#14161a"
+        display={{ xs: "block", lg: "flex" }}
+        height={{ xs: "100%", lg: "100vh" }}
+      >
         {loading ? (
           <p>loading</p>
         ) : (
@@ -59,6 +63,14 @@ const Coin = () => {
             marketCap={coin.market_data.market_cap[currency.toLowerCase()]}
           />
         )}
+
+        <Divider
+          display={{ xs: "none", lg: "auto" }}
+          variant="middle"
+          orientation="vertical"
+          flexItem
+        />
+
         <RightSide />
       </Box>
     </Box>

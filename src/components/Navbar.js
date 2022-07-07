@@ -44,13 +44,14 @@ const Navbar = () => {
         <Toolbar>
           <Container
             sx={{
-              width: "70%",
+              width: { xs: "90%", lg: "70%" },
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
             }}
           >
             <Typography
+              display={{ xs: "none", sm: "block" }}
               onClick={() => {
                 navigate("/");
               }}
@@ -64,6 +65,22 @@ const Navbar = () => {
               }}
             >
               Coin Footprint
+            </Typography>
+            <Typography
+              display={{ sm: "none" }}
+              onClick={() => {
+                navigate("/");
+              }}
+              variant="standard"
+              color="#48eda8"
+              sx={{
+                fontSize: "1.4rem",
+                fontWeight: "800",
+                fontFamily: "Montserrat",
+                cursor: "pointer",
+              }}
+            >
+              CF
             </Typography>
             <Box
               width="90px"

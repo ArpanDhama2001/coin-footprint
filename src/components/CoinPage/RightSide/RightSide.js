@@ -47,7 +47,7 @@ const RightSide = () => {
 
   return (
     <Box
-      width="70%"
+      width={{ xs: "100%", lg: "70%" }}
       display="flex"
       flexDirection="column"
       alignItems="center"

@@ -53,7 +53,11 @@ const LeftSide = (props) => {
   };
 
   return (
-    <Box borderRight="2px solid grey" width="25%" height="100vh" padding="2rem">
+    <Box
+      width={{ xs: "90%", lg: "25%" }}
+      height={{ xs: "90%", lg: "100%" }}
+      padding="2rem"
+    >
       <Box display="flex" flexDirection="column" alignItems="center">
         <img
           src={image}
