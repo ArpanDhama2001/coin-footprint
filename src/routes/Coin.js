@@ -36,7 +36,7 @@ const Coin = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <CircularProgress color="secondary" size={200} />
+        <CircularProgress color="secondary" size={{ xs: 100, lg: 200 }} />
       </Box>
     );
   }
@@ -47,6 +47,9 @@ const Coin = () => {
         backgroundColor="#14161a"
         display={{ xs: "block", lg: "flex" }}
         height={{ xs: "100%", lg: "100vh" }}
+        // sx={{
+        //   maxWidth: "85vw",
+        // }}
       >
         {loading ? (
           <p>loading</p>

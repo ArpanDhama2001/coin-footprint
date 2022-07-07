@@ -10,7 +10,7 @@ const SelectButton = ({ label, onClick, selected }) => {
         selected
           ? {
               backgroundColor: "other.main",
-              width: "15rem",
+              width: { xs: "100%", md: "100%" },
               color: "black",
               borderColor: "other.main",
               "&:hover": {
@@ -19,7 +19,7 @@ const SelectButton = ({ label, onClick, selected }) => {
               },
             }
           : {
-              width: "15rem",
+              width: { xs: "100%", md: "100%" },
               color: "white",
               borderColor: "other.main",
               transition: "all 0.1s",

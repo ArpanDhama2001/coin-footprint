@@ -12,12 +12,12 @@ export default function UserSidebar() {
   const style = {
     sideBar: {
       outer: {
-        height: "100%",
+        minHeight: "100%",
         width: "360px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "10px",
+        justifyContent: "space-evenly",
       },
       container: {
         padding: "2rem",
@@ -43,7 +43,7 @@ export default function UserSidebar() {
           width: "150px",
         },
         wishList: {
-          height: "60%",
+          height: "400px",
           width: "90%",
           marginTop: "20px",
           backgroundColor: "#808080",
@@ -84,6 +84,7 @@ export default function UserSidebar() {
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
+    console.log("toggleDrwaer", event);
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -102,6 +103,23 @@ export default function UserSidebar() {
   const list = (anchor) => (
     <Box sx={style.sideBar.outer} role="presentation">
       <Box sx={style.sideBar.container}>
+        <Button
+          onClick={toggleDrawer(anchor, false)}
+          sx={{
+            color: "white",
+            position: "absolute",
+            left: "300px",
+            fontSize: "1.3rem",
+            borderRadius: "50% 50%",
+            textShadow: "4px 0px 1px crimson",
+            "&:hover": {
+              opacity: ".9",
+              backgroundColor: "transparent",
+            },
+          }}
+        >
+          X
+        </Button>
         <Box sx={style.sideBar.main.body}>
           <Box sx={style.sideBar.main.profile}>
             <Avatar
@@ -178,6 +196,9 @@ export default function UserSidebar() {
         anchor="right"
         open={state["right"]}
         onClose={toggleDrawer("right", false)}
+        sx={{
+          minHeight: "100%",
+        }}
       >
         {list("right")}
       </Drawer>

@@ -205,6 +205,7 @@ const TableComponent = () => {
       </TableContainer>
 
       <Pagination
+        size="small"
         count={coins?.length / 10}
         color="primary"
         onChange={(_, e) => {
@@ -216,6 +217,18 @@ const TableComponent = () => {
           justifyContent: "center",
           padding: "2rem",
         }}
+        // sx={{
+        //   xs: {
+        //     display: "flex",
+        //     justifyContent: "center",
+        //     padding: "2rem",
+        //   },
+        //   sm: {
+        //     display: "flex",
+        //     justifyContent: "center",
+        //     padding: "2rem",
+        //   },
+        // }}
       />
     </div>
   );

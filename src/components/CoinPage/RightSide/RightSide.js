@@ -1,6 +1,7 @@
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Grid } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { CurrencyContext } from "../../../CurrencyContext";
+import { btnData } from "./selectionBtnData";
 import { pastData } from "../../../config/apis";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -47,7 +48,7 @@ const RightSide = () => {
 
   return (
     <Box
-      width={{ xs: "100%", lg: "70%" }}
+      width={{ xs: "100vw", lg: "70%" }}
       display="flex"
       flexDirection="column"
       alignItems="center"
@@ -91,42 +92,39 @@ const RightSide = () => {
                 ],
               }}
             />
-            <Box
+
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2 }}
+              justifyContent="center"
               marginTop="25px"
               sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
+                // display: "grid",
+                justifyContent: "end",
               }}
             >
-              <SelectButton
-                label="1 Day"
-                onClick={() => {
-                  setDays(1);
-                }}
-                selected={days === 1}
-              />
-              <SelectButton
-                label="1 Month"
-                onClick={() => {
-                  setDays(30);
-                }}
-                selected={days === 30}
-              />
-              <SelectButton
-                label="6 Months"
-                onClick={() => {
-                  setDays(182);
-                }}
-                selected={days === 182}
-              />
-              <SelectButton
-                label="1 Year"
-                onClick={() => {
-                  setDays(365);
-                }}
-                selected={days === 365}
-              />
-            </Box>
+              {btnData.map((btn) => {
+                return (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={3}
+                    display="flex"
+                    justifyContent="center"
+                  >
+                    <SelectButton
+                      label={btn.label}
+                      onClick={() => {
+                        setDays(btn.value);
+                      }}
+                      selected={days === btn.value}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
           </Box>
         </>
       )}
